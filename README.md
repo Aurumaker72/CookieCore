@@ -3,15 +3,9 @@
 
 
 ## :rocket: Getting Started
-
-### Setting up
 Create a new project with your desired GUI framework or game engine.
 
 Build the `CookieCore` solution, and add a reference to the `CookieCore.Services`, `CookieCore.ViewModels`, and `CookieCore.Models` assembly.
-
-### Usage
-
-
 
 On startup, create a new instance of the `MainViewModel` class.
 
@@ -41,3 +35,4 @@ MainViewModel.GameViewModel.PropertyChanged += delegate(object? sender, Property
     }
 };
 ```
+> :warning: Proper handling of changes in MainViewModel is required (binding cascade)  
