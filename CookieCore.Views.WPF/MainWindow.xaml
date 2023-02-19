@@ -1,0 +1,43 @@
+﻿<Window x:Class="CookieCore.Views.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CookieCore.Views.WPF"
+        xmlns:viewModels="clr-namespace:CookieCore.ViewModels;assembly=CookieCore.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" d:DataContext="{d:DesignInstance local:MainWindow}">
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <Grid Grid.Column="0">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <TextBlock Text="{Binding MainViewModel.GameViewModel.Cookies}"></TextBlock>
+            </StackPanel>
+         
+            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding MainViewModel.GameViewModel.ClickCookieCommand}" Content="Bake Cookie"/>
+        </Grid>
+        <StackPanel Grid.Column="1" Orientation="Vertical">
+            <Button Content="Save" Command="{Binding MainViewModel.SaveCommand}"/>
+            <Button Content="Load" Command="{Binding MainViewModel.LoadCommand}"/>
+        </StackPanel>
+        <ItemsControl Grid.Column="2" ItemsSource="{Binding MainViewModel.GameViewModel.BuildingViewModels}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type viewModels:BuildingViewModel}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Identifier}"></TextBlock>
+                        <Button Command="{Binding BuyCommand}">Buy</Button>
+                        <TextBlock Text="Amount"></TextBlock>
+                        <TextBlock Text="{Binding Amount}"></TextBlock>
+                        <TextBlock Text="Price"></TextBlock>
+                        <TextBlock Text="{Binding Price}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</Window>

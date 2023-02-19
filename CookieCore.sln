@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookieCore.Models", "CookieCore.Models\CookieCore.Models.csproj", "{AF05B481-912C-4799-B366-0A6839144563}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookieCore.Views.WPF", "CookieCore.Views.WPF\CookieCore.Views.WPF.csproj", "{5F264284-7241-41B4-94EE-51FF904719A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookieCore.ViewModels", "CookieCore.ViewModels\CookieCore.ViewModels.csproj", "{12665DE8-9E45-4F24-8DF8-FA1C2F4E33FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookieCore.Services", "CookieCore.Services\CookieCore.Services.csproj", "{66F9BEA3-F0F0-4272-BC48-3801903EFE1D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF05B481-912C-4799-B366-0A6839144563}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF05B481-912C-4799-B366-0A6839144563}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF05B481-912C-4799-B366-0A6839144563}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF05B481-912C-4799-B366-0A6839144563}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F264284-7241-41B4-94EE-51FF904719A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F264284-7241-41B4-94EE-51FF904719A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F264284-7241-41B4-94EE-51FF904719A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F264284-7241-41B4-94EE-51FF904719A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12665DE8-9E45-4F24-8DF8-FA1C2F4E33FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12665DE8-9E45-4F24-8DF8-FA1C2F4E33FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12665DE8-9E45-4F24-8DF8-FA1C2F4E33FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12665DE8-9E45-4F24-8DF8-FA1C2F4E33FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66F9BEA3-F0F0-4272-BC48-3801903EFE1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66F9BEA3-F0F0-4272-BC48-3801903EFE1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66F9BEA3-F0F0-4272-BC48-3801903EFE1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66F9BEA3-F0F0-4272-BC48-3801903EFE1D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
