@@ -1,6 +1,16 @@
-# CookieCore
-.NET class library for simulation of Orteil's Cookie Clicker
+<p align="center">
+  <img width="128" align="center" src="https://user-images.githubusercontent.com/48759429/219958220-1aa18bef-10cc-47ae-98b5-85145cd2beb9.png">
+</p>
 
+<h1 align="center">
+  CookieCore
+</h1>
+<p align="center">
+    .NET class library for simulation of Orteil's Cookie Clicker
+</p>
+<p align="center">
+<img src="https://img.shields.io/badge/.NET-7-blue?style=for-the-badge"/>
+</p>
 
 ## :rocket: Getting Started
 Create a new project with your desired GUI framework or game engine.
