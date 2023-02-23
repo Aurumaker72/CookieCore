@@ -6,23 +6,22 @@ namespace CookieCore;
 ///     Represents the game state as a plain .NET object
 /// </summary>
 [JsonObject(MemberSerialization.OptOut)]
-public class Game
+public partial class Game
 {
-    private Game() {}
-    
-    public double Cookies;
+    /// <summary>
+    ///     The available buildings
+    /// </summary>
     public Building[] Buildings;
 
-    public static Game Default => new()
+    /// <summary>
+    ///     The amount of cookies
+    /// </summary>
+    public double Cookies;
+
+    /// <remarks>
+    ///     Manual invocation of the constructor is disallowed
+    /// </remarks>
+    private Game()
     {
-        Buildings = new Building[]
-        {
-            new()
-            {
-                Identifier = "Extractor",
-                Price = 5,
-                CookiesPerSecond = 1
-            }
-        }
-    };
+    }
 }

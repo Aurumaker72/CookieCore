@@ -5,9 +5,9 @@ namespace CookieCore.ViewModels;
 
 public partial class BuildingViewModel : ObservableObject
 {
-    private readonly GameViewModel _gameViewModel;
     private readonly Building _building;
-    
+    private readonly GameViewModel _gameViewModel;
+
     public BuildingViewModel(GameViewModel gameViewModel, Building building)
     {
         _gameViewModel = gameViewModel;
@@ -17,15 +17,15 @@ public partial class BuildingViewModel : ObservableObject
 
     public string Identifier => _building.Identifier;
     public int Amount => _building.Amount;
-    public double Price => _building.Price;
+    public double BasePrice => _building.BasePrice;
 
 
     [RelayCommand]
     private void Buy()
     {
-        if (_gameViewModel.Cookies >= Price)
+        if (_gameViewModel.Cookies >= BasePrice)
         {
-            _gameViewModel.Cookies -= Price;
+            _gameViewModel.Cookies -= BasePrice;
             _building.Amount += 1;
             OnPropertyChanged(nameof(Amount));
         }

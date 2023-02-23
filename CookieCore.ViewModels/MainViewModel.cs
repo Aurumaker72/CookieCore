@@ -16,19 +16,18 @@ public partial class MainViewModel : ObservableObject
     private readonly IFilesService _filesService;
     private readonly ITimer _timer;
 
-    private static readonly TimeSpan Tickrate = TimeSpan.FromMilliseconds(1000 / 60);
-
-    public GameViewModel GameViewModel { get; private set; }
-
-    public MainViewModel(ITimersService timersService, IFilesService filesService)
+    public MainViewModel(ITimersService timersService, IFilesService filesService, int ticksPerSecond)
     {
         _filesService = filesService;
 
-        _timer = timersService.Create(Tickrate, () => { GameViewModel?.Tick(Tickrate.TotalMilliseconds / 1000); });
+        var tickrate = TimeSpan.FromMilliseconds(1000 / ticksPerSecond);
+        _timer = timersService.Create(tickrate, () => { GameViewModel?.Tick(tickrate.TotalMilliseconds / 1000); });
 
         // load default save
         LoadFromJson(JsonConvert.SerializeObject(Game.Default));
     }
+
+    public GameViewModel GameViewModel { get; private set; }
 
     [RelayCommand]
     private async Task Save()

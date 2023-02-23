@@ -5,45 +5,41 @@ namespace CookieCore.ViewModels;
 
 public partial class GameViewModel : ObservableObject
 {
-	private readonly Game _game;
-    private readonly BuildingViewModel[] _buildingViewModels;
-
-    public BuildingViewModel[] BuildingViewModels => _buildingViewModels;
-    internal Game Game => _game;
-    
     public GameViewModel(Game game)
     {
-        _game = game;
-        _buildingViewModels = new BuildingViewModel[_game.Buildings.Length];
-        for (int i = 0; i < _game.Buildings.Length; i++)
-        {
-	        _buildingViewModels[i] = new BuildingViewModel(this, _game.Buildings[i]);
-        }
+        Game = game;
+        BuildingViewModels = new BuildingViewModel[Game.Buildings.Length];
+        for (var i = 0; i < Game.Buildings.Length; i++)
+            BuildingViewModels[i] = new BuildingViewModel(this, Game.Buildings[i]);
     }
+
+    public BuildingViewModel[] BuildingViewModels { get; }
+
+    internal Game Game { get; }
 
 
     public double Cookies
     {
-	    get => _game.Cookies;
-	    internal set
-	    {
-		    _game.Cookies = value;
-		    OnPropertyChanged();
-	    }
+        get => Game.Cookies;
+        internal set
+        {
+            Game.Cookies = value;
+            OnPropertyChanged();
+        }
     }
 
-	public double CookiesPerSecond => _game.Buildings.Sum(x => x.CookiesPerSecond * x.Amount);
+    public double CookiesPerSecond => Game.Buildings.Sum(x => x.BaseCookiesPerSecond * x.Amount);
 
-	[RelayCommand]
-	private void ClickCookie()
-	{
-		Cookies++;
-	}
+    [RelayCommand]
+    private void ClickCookie()
+    {
+        Cookies++;
+    }
 
-	internal void Tick(double deltaSeconds)
-	{
-		Cookies += CookiesPerSecond * deltaSeconds;
-		
-		OnPropertyChanged(nameof(CookiesPerSecond));
-	}
+    internal void Tick(double deltaSeconds)
+    {
+        Cookies += CookiesPerSecond * deltaSeconds;
+
+        OnPropertyChanged(nameof(CookiesPerSecond));
+    }
 }

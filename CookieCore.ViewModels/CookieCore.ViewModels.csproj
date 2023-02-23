@@ -7,17 +7,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.2"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\CookieCore.Models\CookieCore.Models.csproj" />
-      <ProjectReference Include="..\CookieCore.Services\CookieCore.Services.csproj" />
+        <ProjectReference Include="..\CookieCore.Models\CookieCore.Models.csproj"/>
+        <ProjectReference Include="..\CookieCore.Services\CookieCore.Services.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Messages" />
+        <Folder Include="Messages"/>
     </ItemGroup>
 
 </Project>
