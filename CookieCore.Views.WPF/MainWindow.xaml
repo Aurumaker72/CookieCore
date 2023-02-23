@@ -26,18 +26,32 @@
             <Button Content="Save" Command="{Binding MainViewModel.SaveCommand}" />
             <Button Content="Load" Command="{Binding MainViewModel.LoadCommand}" />
         </StackPanel>
-        <ItemsControl Grid.Column="2" ItemsSource="{Binding MainViewModel.GameViewModel.BuildingViewModels}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="{x:Type viewModels:BuildingViewModel}">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Amount}" Margin="5 0 5 0" />
-                        <TextBlock Text="{Binding Identifier}" Margin="5 0 5 0" />
-                        <Button Command="{Binding BuyCommand}" Margin="5 0 5 0">Buy</Button>
-                        <TextBlock Text="{Binding BasePrice}" Margin="5 0 5 0" />
-                        <TextBlock Text="Cookies" Margin="5 0 5 0" />
-                    </StackPanel>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <ToggleButton IsChecked="{Binding MainViewModel.QuantityPickerViewModel.IsBuying}">Buying</ToggleButton>
+                <TextBox Text="{Binding MainViewModel.QuantityPickerViewModel.Amount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding MainViewModel.GameViewModel.BuildingViewModels}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:BuildingViewModel}">
+                        <Button Click="BuyButton_Click" IsEnabled="{Binding CanAfford}" Margin="5 0 5 0">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding DisplayAmount}" Margin="5 0 5 0" />
+                                <TextBlock Text="{Binding Identifier}" Margin="5 0 5 0" />
+                                <TextBlock Text="{Binding DisplayPrice}" Margin="5 0 5 0" />
+                                <TextBlock Text="Cookies" Margin="5 0 5 0" />
+                            </StackPanel>
+                        </Button>
+
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+
     </Grid>
 </Window>

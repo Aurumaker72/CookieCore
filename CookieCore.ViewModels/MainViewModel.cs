@@ -20,6 +20,8 @@ public partial class MainViewModel : ObservableObject
     {
         _filesService = filesService;
 
+        QuantityPickerViewModel = new QuantityPickerViewModel();
+
         var tickrate = TimeSpan.FromMilliseconds(1000 / ticksPerSecond);
         _timer = timersService.Create(tickrate, () => { GameViewModel?.Tick(tickrate.TotalMilliseconds / 1000); });
 
@@ -27,6 +29,7 @@ public partial class MainViewModel : ObservableObject
         LoadFromJson(JsonConvert.SerializeObject(Game.Default));
     }
 
+    public QuantityPickerViewModel QuantityPickerViewModel { get; }
     public GameViewModel GameViewModel { get; private set; }
 
     [RelayCommand]
@@ -39,7 +42,7 @@ public partial class MainViewModel : ObservableObject
 
             var json = JsonConvert.SerializeObject(GameViewModel.Game);
 
-            stream.Write(Encoding.Default.GetBytes(json));
+            stream.Write(Encoding.UTF8.GetBytes(json));
         }
     }
 
@@ -50,7 +53,7 @@ public partial class MainViewModel : ObservableObject
         if (file != null)
         {
             var bytes = await file.ReadAllBytes();
-            LoadFromJson(Encoding.Default.GetString(bytes));
+            LoadFromJson(Encoding.UTF8.GetString(bytes));
         }
     }
 
@@ -61,7 +64,7 @@ public partial class MainViewModel : ObservableObject
 
         _timer.IsRunning = false;
 
-        GameViewModel = new GameViewModel(JsonConvert.DeserializeObject<Game>(json));
+        GameViewModel = new GameViewModel(QuantityPickerViewModel, JsonConvert.DeserializeObject<Game>(json));
         OnPropertyChanged(nameof(GameViewModel));
 
         _timer.IsRunning = true;

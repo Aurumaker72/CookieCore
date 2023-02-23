@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using CookieCore.ViewModels;
 using CookieCore.Views.WPF.Services;
 
@@ -17,4 +18,16 @@ public partial class MainWindow : Window
     }
 
     public MainViewModel MainViewModel { get; set; }
+
+    private void BuyButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (((FrameworkElement)sender).DataContext is BuildingViewModel buildingViewModel)
+        {
+            if (!buildingViewModel.Buy()) MessageBox.Show("implement buy/sell error sfx for wpf frontend :)");
+        }
+        else
+        {
+            throw new Exception(); // uh
+        }
+    }
 }
