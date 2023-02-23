@@ -1,4 +1,6 @@
-﻿namespace CookieCore.Services;
+﻿using CookieCore.Services.Abstractions;
+
+namespace CookieCore.Services;
 
 /// <summary>
 /// Represents a contract for a timer creation service

@@ -1,41 +1,70 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Text;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CookieCore.Services;
+using CookieCore.Services.Abstractions;
+using CookieCore.Services.Extensions;
 using Newtonsoft.Json;
 
 namespace CookieCore.ViewModels;
 
+/// <summary>
+///     Represents an orchestrator viewmodel for the <see cref="GameViewModel" />
+/// </summary>
 public partial class MainViewModel : ObservableObject
 {
-	private static TimeSpan Tickrate = TimeSpan.FromMilliseconds(1000 / 60);
+    private readonly IFilesService _filesService;
+    private readonly ITimer _timer;
 
-	private string _serialized;
-    
-    private GameViewModel _gameViewModel;
-    public GameViewModel GameViewModel => _gameViewModel;
+    private static readonly TimeSpan Tickrate = TimeSpan.FromMilliseconds(1000 / 60);
 
-    public MainViewModel(ITimersService timersService)
+    public GameViewModel GameViewModel { get; private set; }
+
+    public MainViewModel(ITimersService timersService, IFilesService filesService)
     {
-	    timersService.Create(Tickrate, () =>
-	    {
-		    GameViewModel?.Tick(Tickrate.TotalMilliseconds / 1000);
-	    });
-	    
-	    // load default save
-	    _serialized = JsonConvert.SerializeObject(Game.Default);
-	    LoadCommand.Execute(null);
-    }
-    
-    [RelayCommand]
-    private void Save()
-    {
-	    _serialized = JsonConvert.SerializeObject(_gameViewModel.Game);
+        _filesService = filesService;
+
+        _timer = timersService.Create(Tickrate, () => { GameViewModel?.Tick(Tickrate.TotalMilliseconds / 1000); });
+
+        // load default save
+        LoadFromJson(JsonConvert.SerializeObject(Game.Default));
     }
 
     [RelayCommand]
-    private void Load()
+    private async Task Save()
     {
-	    _gameViewModel = new(JsonConvert.DeserializeObject<Game>(_serialized));
-	    OnPropertyChanged(nameof(GameViewModel));
+        var file = await _filesService.TryPickSaveFileAsync("save.json", ("Save file", new[] { "json" }));
+        if (file != null)
+        {
+            await using var stream = await file.OpenStreamForWriteAsync();
+
+            var json = JsonConvert.SerializeObject(GameViewModel.Game);
+
+            stream.Write(Encoding.Default.GetBytes(json));
+        }
+    }
+
+    [RelayCommand]
+    private async Task Load()
+    {
+        var file = await _filesService.TryPickOpenFileAsync(new[] { "json" });
+        if (file != null)
+        {
+            var bytes = await file.ReadAllBytes();
+            LoadFromJson(Encoding.Default.GetString(bytes));
+        }
+    }
+
+    private void LoadFromJson(string json)
+    {
+        // we pause the timer during game vm instance mutation to avoid issues if timer
+        // is invoking on another thread
+
+        _timer.IsRunning = false;
+
+        GameViewModel = new GameViewModel(JsonConvert.DeserializeObject<Game>(json));
+        OnPropertyChanged(nameof(GameViewModel));
+
+        _timer.IsRunning = true;
     }
 }

@@ -29,12 +29,11 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type viewModels:BuildingViewModel}">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Identifier}"></TextBlock>
-                        <Button Command="{Binding BuyCommand}">Buy</Button>
-                        <TextBlock Text="Amount"></TextBlock>
-                        <TextBlock Text="{Binding Amount}"></TextBlock>
-                        <TextBlock Text="Price"></TextBlock>
-                        <TextBlock Text="{Binding Price}"></TextBlock>
+                        <TextBlock Text="{Binding Amount}" Margin="5 0 5 0"></TextBlock>
+                        <TextBlock Text="{Binding Identifier}" Margin="5 0 5 0"></TextBlock>
+                        <Button Command="{Binding BuyCommand}" Margin="5 0 5 0">Buy</Button>
+                        <TextBlock Text="{Binding Price}" Margin="5 0 5 0"></TextBlock>
+                        <TextBlock Text="Cookies" Margin="5 0 5 0"/>
                     </StackPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

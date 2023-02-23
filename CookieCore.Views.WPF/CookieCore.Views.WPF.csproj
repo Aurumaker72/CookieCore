@@ -11,4 +11,8 @@
       <ProjectReference Include="..\CookieCore.ViewModels\CookieCore.ViewModels.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="WindowsAPICodePack-Shell" Version="1.1.1" />
+    </ItemGroup>
+
 </Project>
