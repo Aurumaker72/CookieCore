@@ -20,11 +20,9 @@ Build the `CookieCore` solution, and add a reference to the `CookieCore.Services
 On startup, create a new instance of the `MainViewModel` class.
 
 ```cs
-
-MainViewModel = new(timerService);
-
+MainViewModel = new(timersService: new(), filesService: new(), ticksPerSecond: 60);
 ```
-> :warning: Implementing `ITimersService` is required
+> :warning: Implementing `ITimersService` and `IFilesService` is required
 
 #### :one: XAML Binding
 You can effortlessly bind to properties under the `MainViewModel`
